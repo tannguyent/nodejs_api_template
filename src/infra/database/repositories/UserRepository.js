@@ -1,11 +1,9 @@
-import User from '../models/User';
-
-import MongooseRepository from './MongooseRepository';
+const MongooseRepository = require('./MongooseRepository');
 
 class UserRepository extends MongooseRepository {
   constructor() {
-      super({ Model: User });
+      super({ Model: userSchema });
   }
 }
 
-export default UserRepository;
+module.exports = UserRepository;

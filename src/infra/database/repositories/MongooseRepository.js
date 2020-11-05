@@ -50,4 +50,4 @@ class MongooseRepository {
   }
 }
 
-export default MongooseRepository;
+module.exports =  MongooseRepository;

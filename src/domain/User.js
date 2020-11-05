@@ -1,4 +1,4 @@
-import Entity from './Entity'
+const Entity = require('./Entity')
 
 class User  extends Entity {
   constructor (email, username, encodedPassword, {roles = ['USER']} = {}) {
@@ -33,4 +33,4 @@ class User  extends Entity {
   }
 }
 
-export default User;
+module.exports =  User;

@@ -1,8 +1,8 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
-import UserEntity from '../../../domain/User'
+const UserEntity = require('../../../domain/User')
 
-const UserSchema =  mongoose.Schema({
+const UserSchema = mongoose.Schema({
   email: {
     type: String, 
     unique: true, 
@@ -34,6 +34,6 @@ UserSchema.index({username: 1});
 UserSchema.index({roles: 1});
 
 // loads the user entity methods in the model
-UserSchema.load(UserEntity);
+UserSchema.loadClass(UserEntity);
 
-export default mongoose.model('User', UserSchema);
+module.exports =  mongoose.model('User', UserSchema);

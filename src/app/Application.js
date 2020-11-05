@@ -9,5 +9,5 @@ class Application {
   }
 }
 
-export default Application;
+module.exports = Application;
   
