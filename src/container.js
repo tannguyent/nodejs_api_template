@@ -25,6 +25,8 @@ const { UserSchema } = require('./infra/database/models');
 // repositories
 const { UserRepository } = require('./infra/database/repositories');
 
+// database 
+const Database = require('./infra/database');
 
 // container
 const container = createContainer();
@@ -53,6 +55,10 @@ container
     exeptionHandler: asValue(config.production ? exceptionHandler : devExeptionHandler)
   });
 
+container
+  .register({
+    database: asClass(Database)
+  });
 
 // model entity
 container
