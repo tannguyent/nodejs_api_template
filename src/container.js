@@ -57,13 +57,13 @@ container
 // model entity
 container
   .register({
-    userSchema: asClass(UserSchema)
+    userSchema: asValue(UserSchema)
   });
 
 // repositories
 container
   .register({
-    userRepository: asClass(UserRepository)
+    userRepository: asClass(UserRepository).singleton()
   });
 
 module.exports = container;
