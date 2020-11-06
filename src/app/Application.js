@@ -1,14 +1,14 @@
 class Application {
-  constructor({ server, logger, database }) {
+  constructor({ server, logger, manageDB }) {
     this.server = server;
     this.logger = logger;
-    this.database = database;
+    this.manageDB = manageDB;
   }
 
   async start() {
 
-    if(this.database) {
-      await this.database.connect();
+    if(this.manageDB) {
+      await this.manageDB.connect();
     }
 
     await this.server.start();

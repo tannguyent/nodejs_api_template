@@ -1,5 +1,6 @@
-const UserSchema = require ('./User')
+const ModelsLoader = require('./ModelsLoader');
 
-module.exports = {
-    UserSchema
-}
+module.exports = ModelsLoader.load({
+  baseFolder: __dirname
+});
+

@@ -20,13 +20,13 @@ const exceptionHandler = require('./infra/exceptions/exceptionHandler');
 const devExeptionHandler = require('./infra/exceptions/devExeptionHandler');
 
 // entities
-const { UserSchema } = require('./infra/database/models');
+const { User: UserModel } = require('./infra/database/models');
 
 // repositories
 const { UserRepository } = require('./infra/database/repositories');
 
 // database 
-const Database = require('./infra/database');
+const ManageDB = require('./infra/database');
 
 // container
 const container = createContainer();
@@ -55,15 +55,11 @@ container
     exeptionHandler: asValue(config.production ? exceptionHandler : devExeptionHandler)
   });
 
+// database
 container
   .register({
-    database: asClass(Database)
-  });
-
-// model entity
-container
-  .register({
-    userSchema: asValue(UserSchema)
+    manageDB: asClass(ManageDB),
+    UserModel: asValue(UserModel)
   });
 
 // repositories
