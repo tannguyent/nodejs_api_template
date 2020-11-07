@@ -2,20 +2,14 @@ const mongoose = require('mongoose')
 
 class ManageDB {
   constructor ({ config, logger }) {
-    this.config = config
+    const { db } = config;
+
+    this.config = config;
+    this.connection = db
     this.logger = logger
   }
 
   async connect () {
-    let credentials = ''
-
-    if (this.config.auth) {
-      credentials = `${this.config.user}:${this.config.password}@`
-    }
-
-    const connection = typeof this.config === 'string'
-      ? this.config
-      : `mongodb://${credentials}${this.config.host}:${this.config.port}/${this.config.database}`
     const options = this.config.ENV === 'prod'
       ? { autoIndex: false }
       : {}
@@ -26,7 +20,11 @@ class ManageDB {
     mongoose.set('useFindAndModify', false)
     
     await mongoose
-      .connect(connection, { useNewUrlParser: true, ...options })
+      .connect(this.connection, { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        ...options 
+      })
       .catch(error => {
         this.logger.error('Error while connecting to the database', error)
         process.exit(1)
