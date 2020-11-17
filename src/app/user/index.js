@@ -1,8 +1,28 @@
+const { 
+  CreateUserValidation,
+  GetAllUserValidation,
+  GetUserValidation,
+  UpdateUserValidation,
+  DeleteUserValidation,
+} = require ('./validation');
+
+
+const GetAllUser = require('./GetAllUser');
+const GetUser = require('./GetUser');
+const CreateUser = require('./CreateUser');
+const UpdateUser = require('./UpdateUser');
+const DeleteUser = require('./DeleteUser');
+
 module.exports = {
-  GetAllUsers: require('./GetAllUsers'),
-  CreateUser: require('./CreateUser'),
-  GetUser: require('./GetUser'),
-  UpdateUser: require('./UpdateUser'),
-  DeleteUser: require('./DeleteUser')
+  GetAllUser,
+  GetUser,
+  CreateUser, 
+  UpdateUser, 
+  DeleteUser,
+  CreateUserValidation,
+  GetAllUserValidation,
+  GetUserValidation,
+  UpdateUserValidation,
+  DeleteUserValidation,
 };
   

@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 
 const HomeController = require('../controllers/HomeController');
 
-module.exports = ({ config, containerMiddleware, loggerMiddleware, exeptionHandler }) => {
+module.exports = ({ config, containerMiddleware, loggerMiddleware, exeptionHandler, notFoundMiddleware, swaggerMiddleware }) => {
   const router = Router();
 
   /* istanbul ignore if */
@@ -27,7 +27,8 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, exeptionHandl
     .use(cors())
     .use(bodyParser.json())
     .use(compression())
-    .use(containerMiddleware);
+    .use(containerMiddleware)
+    .use('/docs', swaggerMiddleware);
 
   /*
    * Add your API routes here
@@ -43,6 +44,8 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, exeptionHandl
   router.use('/api', apiRouter);
 
   router.use(exeptionHandler);
+
+  router.use(notFoundMiddleware);
 
   return router;
 };

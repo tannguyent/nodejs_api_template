@@ -4,7 +4,7 @@ class CreateUser {
   }
 
   async exec (user) {
-    return this.userRepository.create(user);
+    return await this.userRepository.create(user);
   }
 }
 

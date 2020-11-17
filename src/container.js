@@ -19,6 +19,9 @@ const loggerMiddleware = require('./infra/logging/loggerMiddleware');
 const exceptionHandler = require('./infra/exceptions/exceptionHandler');
 const devExeptionHandler = require('./infra/exceptions/devExeptionHandler');
 
+// middleware
+const { notFoundMiddleware } = require('./infra/middlewares');
+
 // entities
 const { User: UserModel } = require('./infra/database/models');
 
@@ -30,6 +33,13 @@ const ManageDB = require('./infra/database');
 
 // container
 const container = createContainer();
+
+// serializers
+const { UserSerializer } = require('./interfaces/serializers');
+
+
+// swagger 
+const swaggerMiddleware = require('./infra/swagger/swaggerMiddleware');
 
 // System
 container
@@ -52,7 +62,9 @@ container
   })
   .register({
     containerMiddleware: asValue(scopePerRequest(container)),
-    exeptionHandler: asValue(config.production ? exceptionHandler : devExeptionHandler)
+    exeptionHandler: asValue(config.production ? exceptionHandler : devExeptionHandler),
+    notFoundMiddleware: asValue(notFoundMiddleware),
+    swaggerMiddleware: asValue([swaggerMiddleware])
   });
 
 // database
@@ -66,6 +78,12 @@ container
 container
   .register({
     userRepository: asClass(UserRepository).singleton()
+  });
+
+// serializers
+container
+  .register({
+    userSerializer: asValue(UserSerializer)
   });
 
 module.exports = container;

@@ -14,7 +14,7 @@ const HomeController = {
   index(req, res, next) {
     res
       .status(Status.OK)
-      .json({'message': 'welcome to node api boilerplate'});
+      .json({'message': 'welcome to node api test'});
   },
 };
 
